@@ -21,7 +21,7 @@ app.use(express.static("public"));
 
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
-mongoose.promise = global.Promise;
+mongoose.promise = Promise;
 mongoose.connect("mongodb://localhost/test", {
   useMongoClient: true
 });
