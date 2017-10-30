@@ -7,7 +7,7 @@ var bodyParser = require("body-parser");
 var cheerio = require("cheerio");
 var request = require("request");
 // Require all models
-var db = require(".models");
+var db = require("./models");
 
 var PORT = 3000;
 // Initialize Express
