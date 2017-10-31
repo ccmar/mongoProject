@@ -31,7 +31,7 @@ mongoose.connect("mongodb://localhost/test", {
 // A GET route for scraping the time website
 app.get("/scrape", function(req, res) {
 // grab the body of the html with request(**)
-  request.get("http://www.time.com/").then(function(response) {
+  request('http://www.time.com/',function(error, response, body) {
 // load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 // grab every h2 within an article tag, and do the following:
