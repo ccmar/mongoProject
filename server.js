@@ -23,7 +23,7 @@ app.use(express.static("public"));
 // Connect to the Mongo DB
 mongoose.promise = Promise;
 var connection = process.env.MONGOLAB_URI || "mongodb://localhost/test";
-mongoose.connect(connection), {
+mongoose.connect(connection, {
   useMongoClient: true
 });
 
