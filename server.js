@@ -50,17 +50,19 @@ app.get("/scrape", function(req, res) {
             .attr("href");
 
             // Create a new Article using the `result` object built from scraping
-           db.Article
-             .create(result)
-             .then(function(dbArticle) {
-               // If we were able to successfully scrape and save an Article, send a message to the client
+            var entry = new db.Article(result);
 
-             })
-             .catch(function(err) {
-               // If an error occurred, send it to the client
-               //res.json(err);
-               console.log(err)
-             });
+       // Now, save that entry to the db
+       entry.save(function(err, doc) {
+         // Log any errors
+         if (err) {
+           console.log(err);
+         }
+         // Or log the doc
+         else {
+           console.log(doc);
+         }
+       });
          });
          res.send("Scrape Complete");
        });
@@ -68,16 +70,16 @@ app.get("/scrape", function(req, res) {
 
   app.get("/articles", function(req, res) {
   // Grab every document in the Articles collection
-  db.Article
-    .find({})
-    .then(function(dbArticle) {
-      // If we were able to successfully find Articles, send them back to the client
-      res.json(dbArticle);
-    })
-    .catch(function(err) {
-      // If an error occurred, send it to the client
-      res.json(err);
-    });
+  db.Article.find({}, function(error, doc) {
+    // Log any errors
+    if (error) {
+      console.log(error);
+    }
+    // Or send the doc to the browser as a json object
+    else {
+      res.json(doc);
+    }
+  });
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
