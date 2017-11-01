@@ -1,6 +1,7 @@
 var express = require("express");
 var expressHandlebars = require("express-handlebars");
 var mongoose = require("mongoose");
+mongoose.Promise = Promise;
 var bodyParser = require("body-parser");
 // Our scraping tools
 // It works on the client and on the server
