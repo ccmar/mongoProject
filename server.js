@@ -10,7 +10,7 @@ var request = require("request");
 // Require all models
 var db = require("./models");
 
-var PORT = process.env.PORT || 4100;
+var PORT = 4100;
 // Initialize Express
 var app = express();
 // Configure middleware
@@ -23,7 +23,11 @@ app.use(express.static("public"));
 // Set mongoose to leverage built in JavaScript ES6 Promises
 // Connect to the Mongo DB
 mongoose.promise = Promise;
-var connection = process.env.MONGOLAB_URI || "mongodb://localhost/test";
+var connection = "mongodb://localhost/test";
+if (process.env.NODE_ENV === 'production') {
+  connection = process.env.MONGOLAB_URI;
+  PORT = process.env.PORT;
+}
 mongoose.connect(connection, {
   useMongoClient: true
 });
