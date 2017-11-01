@@ -25,7 +25,7 @@ app.use(express.static("public"));
 mongoose.promise = Promise;
 var connection = "mongodb://localhost/test";
 if (process.env.NODE_ENV === 'production') {
-  connection = process.env.MONGOLAB_URI;
+  connection = process.env.MONGODB_URI;
   PORT = process.env.PORT;
 }
 mongoose.connect(connection, {
